@@ -137,6 +137,7 @@
                 self.solutions(solutions);
             } else {
                 self.solutions('none');
+                bootbox.alert('found No solutions');
             }
         };
 
