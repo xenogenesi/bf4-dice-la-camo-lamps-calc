@@ -27,8 +27,53 @@
             { name: "after", text: "after", value: ko.observable('').extend({lamps: ''}) }
         ];
 
+        self.populateDataset = function(dataSet) {
+            console.log('dataSet: ', dataSet);
+            if (dataSet === 'default') {
+                self.inputs[0].value("11,17");
+                self.inputs[1].value("3,4,8,11,15,17,19");
+                self.inputs[2].value("4,8,9,11,12,14,15,17");
+                self.inputs[3].value("1,2,3,10,11,16,17,19");
+                self.inputs[4].value("1,6,7,9,10,11,12,14,17,20");
+                self.inputs[5].value("9,12,14");
+                self.inputs[6].value("5,13,18");
+                self.inputs[7].value("5,6,7,11,13,17,18,20");
+                self.inputs[8].value("11,17");
+            } else if (dataSet === 'whiteshark-1') {
+                self.inputs[0].value("8,13,14");
+                self.inputs[1].value("1,2,3,8,13,14,18");
+                self.inputs[2].value("1,2,8,13,14,16,17,20");
+                self.inputs[3].value("3,18");
+                self.inputs[4].value("10,11,12");
+                self.inputs[5].value("5,6,8,13,14,16,17,19,20");
+                self.inputs[6].value("3,4,5,6,7,8,13,14,15,18,19");
+                self.inputs[7].value("4,7,8,9,10,11,12,13,14,15");
+                self.inputs[8].value("8,9,13,14");
+            } else if (dataSet === "whiteshark-2") {
+                self.inputs[0].value("4,8,20");
+                self.inputs[1].value("1,4,5,8,9,10,11,12,14,16,18,19,20");
+                self.inputs[2].value("2,3,4,6,8,9,14,16,20");
+                self.inputs[3].value("1,4,7,8,12,13,18,20");
+                self.inputs[4].value("7,13");
+                self.inputs[5].value("2,3,4,6,8,15,17,20");
+                self.inputs[6].value("4,8,11,15,17,19,20");
+                self.inputs[7].value("11,19");
+                self.inputs[8].value("4,5,8,10,20");
+            }
+        };
+
         self.populateTest = function() {
-            bootbox.confirm("Are you sure?", function(result) {
+            bootbox.dialog({
+                message: "Select a data set",
+                title: "Popupate test",
+                buttons: {
+                    success: { label: "Default",  callback: function() { self.populateDataset("default"); } },
+                    danger: { label: "whiteshark-1",  callback: function() { self.populateDataset("whiteshark-1"); } },
+                    main: { label: "whiteshark-2",  callback: function() { self.populateDataset("whiteshark-2"); } }
+                }
+            });
+
+            /*bootbox.confirm("Are you sure?", function(result) {
                 if (result === true) {
                     self.inputs[0].value("11,17");
                     self.inputs[1].value("3,4,8,11,15,17,19");
@@ -40,7 +85,7 @@
                     self.inputs[7].value("5,6,7,11,13,17,18,20");
                     self.inputs[8].value("11,17");
                 }
-            });
+            });*/
         };
 
         self.clear = function() {
